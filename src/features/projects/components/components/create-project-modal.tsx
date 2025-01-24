@@ -1,0 +1,15 @@
+"use client";
+
+import { ResponsiveModal } from "@/components/responsive-modal";
+import { CreateProjectForm } from "./create-project-form";
+import { useCreateProjectModal } from "../../hook/use-create-project-modal";
+
+export const CreateProjectModal = () => {
+    const { isOpen, setIsOpen, open, close } = useCreateProjectModal();
+
+    return (
+        <ResponsiveModal open={isOpen} onOpenChange={setIsOpen}>
+            <CreateProjectForm onCancel={close}/>
+        </ResponsiveModal>
+    )
+};
