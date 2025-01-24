@@ -6,7 +6,7 @@ import { InferRequestType, InferResponseType } from "hono";
 import { client } from "@/lib/rpc";
 import { useRouter } from "next/navigation";
 
-type ResponseType = InferResponseType<typeof client.api.projects["$post"]>;
+type ResponseType = InferResponseType<typeof client.api.projects["$post"], 200>;
 type RequestType = InferRequestType<typeof client.api.projects["$post"]>;
 
 export const useCreateProject = () => {
@@ -19,20 +19,27 @@ export const useCreateProject = () => {
         RequestType
     >({
         mutationFn: async ({form}) => {
+            console.log("Making API call with form data:", form);
             const response = await client.api.projects["$post"]({ form });
+            
             if (!response.ok) {
+                console.error("Failed to create project:", response.status, response.statusText);
                 throw new Error("Failed to create project");
             }
 
-            return await response.json();
+            const data = await response.json();
+            console.log("API Response:", data);
+            return data;
         },
-        onSuccess: () => {
+        onSuccess: ({data}) => {
+            console.log("Project created successfully:", data);
             toast.success("Project created successfully");
             router.refresh();
             queryClient.invalidateQueries({ queryKey: ["projects"] });
         },
-        onError: () => {
-            toast.error("Failed to create project");
+        onError: (error) => {
+            console.error("Error creating project:", error);
+            toast.error(error.message || "Failed to create project");
         }
     });
 

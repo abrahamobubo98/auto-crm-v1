@@ -24,40 +24,54 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useCreateProject } from "../../hook/use-create-project";
+import { useCreateProject } from "../../api/use-create-project";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ImageIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 
 interface CreateProjectFormProps {
-    onCancel?: () => void;   
+    workspaceId: string;
+    onSuccess?: () => void;
 }
 
-export const CreateProjectForm = ({ onCancel }: CreateProjectFormProps) => {
+export const CreateProjectForm = ({ workspaceId, onSuccess }: CreateProjectFormProps) => {
     const router = useRouter();
-    const {mutate, isPending} = useCreateProject();
+    const { mutate: createProject, isPending } = useCreateProject();
     const inputRef = useRef<HTMLInputElement>(null);
 
     const form = useForm<z.infer<typeof createProjectSchema>>({
         resolver: zodResolver(createProjectSchema),
         defaultValues: {
             name: "",
+            workspaceId,
         },
     });
 
     const onSubmit = (values: z.infer<typeof createProjectSchema>) => {
         const finalValues = {
             ...values,
+            workspaceId,
             image: values.image instanceof File ? values.image : undefined,
         }
 
-        mutate({ form: finalValues }, {
-            onSuccess: ({data}) => {
-                form.reset();
-                router.push(`/projects/${data.$id}`);
+        console.log("Submitting project with values:", finalValues);
+
+        createProject(
+            { form: finalValues },
+            {
+                onSuccess: ({ data }) => {
+                    console.log("Project created successfully:", data);
+                    form.reset();
+                    onSuccess?.();
+                    router.push(`/workspaces/${workspaceId}/projects/${data.$id}`);
+                },
+                onError: (error) => {
+                    console.error("Failed to create project:", error);
+                }
             }
-        });
+        );
     };
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -171,16 +185,6 @@ export const CreateProjectForm = ({ onCancel }: CreateProjectFormProps) => {
                         </div>
                         <DottedSeparator className="py-7"/>
                         <div className="flex items-center justify-between">
-                            <Button
-                                type="button"
-                                size="lg"
-                                variant="secondary"
-                                onClick={onCancel}
-                                disabled={isPending}
-                                className={cn(!onCancel && "invisible")}
-                            >
-                                Cancel
-                            </Button>
                             <Button
                                 type="submit"
                                 size="lg"
