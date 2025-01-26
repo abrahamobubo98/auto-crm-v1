@@ -2,7 +2,7 @@
 
 import {useRef} from "react";
 import { useForm } from "react-hook-form";
-import { createProjectSchema } from "../../schemas";
+import { createProjectSchema } from "../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Image from "next/image";
@@ -24,23 +24,25 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useCreateProject } from "../../hook/use-create-project";
+import { useCreateProject } from "../api/use-create-project";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ImageIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 
 interface CreateProjectFormProps {
     onCancel?: () => void;   
 }
 
 export const CreateProjectForm = ({ onCancel }: CreateProjectFormProps) => {
+    const workspaceId = useWorkspaceId();
     const router = useRouter();
     const {mutate, isPending} = useCreateProject();
     const inputRef = useRef<HTMLInputElement>(null);
 
     const form = useForm<z.infer<typeof createProjectSchema>>({
-        resolver: zodResolver(createProjectSchema),
+        resolver: zodResolver(createProjectSchema.omit({workspaceId: true})),
         defaultValues: {
             name: "",
         },
@@ -49,13 +51,14 @@ export const CreateProjectForm = ({ onCancel }: CreateProjectFormProps) => {
     const onSubmit = (values: z.infer<typeof createProjectSchema>) => {
         const finalValues = {
             ...values,
+            workspaceId,
             image: values.image instanceof File ? values.image : undefined,
         }
 
         mutate({ form: finalValues }, {
             onSuccess: ({data}) => {
                 form.reset();
-                router.push(`/projects/${data.$id}`);
+                router.push(`/workspaces/${workspaceId}/projects/${data.$id}`);
             }
         });
     };
@@ -139,7 +142,7 @@ export const CreateProjectForm = ({ onCancel }: CreateProjectFormProps) => {
                                                     type="button"
                                                     disabled={isPending}
                                                     variant="destructive"
-                                                    size="xs"
+                                                    size="sm"
                                                     className="w-fit mt-2"
                                                     onClick={
                                                         () => {
@@ -155,8 +158,8 @@ export const CreateProjectForm = ({ onCancel }: CreateProjectFormProps) => {
                                                     <Button
                                                     type="button"
                                                     disabled={isPending}
-                                                    variant="tertiary"
-                                                    size="xs"
+                                                    variant="secondary"
+                                                    size="sm"
                                                     className="w-fit mt-2"
                                                     onClick={() => inputRef.current?.click()}
                                                     >

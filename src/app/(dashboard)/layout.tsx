@@ -1,25 +1,44 @@
 import { Navbar } from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar";
+import { CreateProjectModal } from "@/features/projects/components/create-project-modal";
+import { CreateTaskModal } from "@/features/tasks/components/create-task-modal";
 import { CreateWorkspaceModal } from "@/features/workspaces/components/create-workspace-modal";
+import { createSearchParamsCache, parseAsString, parseAsStringEnum } from "nuqs/server";
+import { NuqsAdapter } from "nuqs/adapters/next";
+import { TaskStatus } from "@/features/tasks/types";
+
+export const dynamic = "force-dynamic";
+
+createSearchParamsCache({
+  projectId: parseAsString.withDefault(""),
+  status: parseAsStringEnum(Object.values(TaskStatus)).withDefault(TaskStatus.TODO),
+  assigneeId: parseAsString.withDefault(""),
+  search: parseAsString.withDefault(""),
+  dueDate: parseAsString.withDefault(""),
+});
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className="min-h-screen">
-            <CreateWorkspaceModal />
-            <div className="flex w-full h-full">
-                <div className="fixed left-0 top-0 hidden lg:block lg-w-[264px] h-full overflow-y-auto">
-                    <Sidebar />
-                </div>
-                <div className="lg:pl-[264px] w-full">
-                    <div className="mx-auto max-w-screen-2xl h-full">
-                        <Navbar/>
-                        <main className="h-full py-8 px-6 flex flex-col">
-                            {children}
-                        </main>
+        <NuqsAdapter>
+            <div className="min-h-screen">
+                <CreateWorkspaceModal />
+                <CreateProjectModal />
+                <CreateTaskModal />
+                <div className="flex w-full h-full">
+                    <div className="fixed left-0 top-0 hidden lg:block lg-w-[264px] h-full overflow-y-auto">
+                        <Sidebar />
+                    </div>
+                    <div className="lg:pl-[264px] w-full">
+                        <div className="mx-auto max-w-screen-2xl h-full">
+                            <Navbar/>
+                            <main className="h-full py-8 px-6 flex flex-col">
+                                {children}
+                            </main>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </NuqsAdapter>
     );
 };
 
