@@ -1,6 +1,6 @@
 import { PencilIcon } from "lucide-react";
 
-import { MemberAvatar } from "@/features/members/components/members-avatar";
+import { MemberAvatar } from "@/features/members/components/member-avatar";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";

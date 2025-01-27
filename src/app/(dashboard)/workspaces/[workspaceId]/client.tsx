@@ -5,7 +5,11 @@ import { formatDistanceToNow } from "date-fns";
 import { CalendarIcon, PlusIcon, SettingsIcon } from "lucide-react";
 
 import { Task } from "@/features/tasks/types";
+<<<<<<< HEAD
 import { PopulatedMember } from "@/features/members/types";
+=======
+import { Member } from "@/features/members/types";
+>>>>>>> temp-branch
 import { Project } from "@/features/projects/types";
 import { useGetTasks } from "@/features/tasks/api/use-get-tasks";
 import { useGetMembers } from "@/features/members/api/use-get-members";
@@ -13,7 +17,11 @@ import { useGetProjects } from "@/features/projects/api/use-get-projects";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { useCreateTaskModal } from "@/features/tasks/hooks/use-create-task-modal";
+<<<<<<< HEAD
 import { useCreateProjectModal } from "@/features/projects/hook/use-create-project-modal";
+=======
+import { useCreateProjectModal } from "@/features/projects/hooks/use-create-project-modal";
+>>>>>>> temp-branch
 import { useGetWorkspaceAnalytics } from "@/features/workspaces/api/use-get-workspace-analytics";
 
 import { Button } from "@/components/ui/button";
@@ -22,7 +30,11 @@ import { Analytics } from "@/components/analytics";
 import { PageLoader } from "@/components/page-loader";
 import { Card, CardContent } from "@/components/ui/card";
 import { DottedSeparator } from "@/components/dotted-separator";
+<<<<<<< HEAD
 import { MemberAvatar } from "@/features/members/components/members-avatar";
+=======
+import { MemberAvatar } from "@/features/members/components/member-avatar";
+>>>>>>> temp-branch
 
 export const WorkspaceIdClient = () => {
   const workspaceId = useWorkspaceId();
@@ -166,7 +178,11 @@ export const ProjectList = ({ data, total }: ProjectListProps) => {
 };
 
 interface MembersListProps {
+<<<<<<< HEAD
   data: PopulatedMember[];
+=======
+  data: Member[];
+>>>>>>> temp-branch
   total: number;
 };
 

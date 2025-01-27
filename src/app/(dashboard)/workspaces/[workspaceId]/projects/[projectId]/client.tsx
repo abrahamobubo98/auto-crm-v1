@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { PencilIcon } from "lucide-react";
 
-import { useProjectId } from "@/features/projects/hook/use-project-id";
+import { useProjectId } from "@/features/projects/hooks/use-project-id";
 import { useGetProject } from "@/features/projects/api/use-get-project";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 import { TaskViewSwitcher } from "@/features/tasks/components/task-view-switcher";

@@ -3,7 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreVertical } from "lucide-react"
 
-import { MemberAvatar } from "@/features/members/components/members-avatar";
+import { MemberAvatar } from "@/features/members/components/member-avatar";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 
 import { Badge } from "@/components/ui/badge";

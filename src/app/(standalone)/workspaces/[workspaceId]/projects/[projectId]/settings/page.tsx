@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { getCurrent } from "@/features/auth/queries";
 import { EditProjectForm } from "@/features/projects/components/edit-project-form";
 import { getProject } from "@/features/projects/queries";
@@ -11,11 +12,19 @@ const ProjectIdSettingsPage = async ({ params }: Props) => {
     const { projectId } = await params;
     const { workspaceId } = await params;
     const user = await getCurrent();
+=======
+import { redirect } from "next/navigation";
 
-    if (!user) {
-        return redirect("/sign-in");
-    }
+import { getCurrent } from "@/features/auth/queries";
 
+import { ProjectIdSettingsClient } from "./client";
+>>>>>>> temp-branch
+
+const ProjectIdSettingsPage = async () => {
+  const user = await getCurrent();
+  if (!user) redirect("/sign-in");
+
+<<<<<<< HEAD
     const project = await getProject({ projectId });
 
     return (
@@ -27,3 +36,9 @@ const ProjectIdSettingsPage = async ({ params }: Props) => {
 }
 
 export default ProjectIdSettingsPage;
+=======
+  return <ProjectIdSettingsClient />
+};
+ 
+export default ProjectIdSettingsPage;
+>>>>>>> temp-branch

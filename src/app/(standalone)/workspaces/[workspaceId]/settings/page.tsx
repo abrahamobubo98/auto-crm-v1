@@ -1,8 +1,6 @@
-import { getCurrent } from "@/features/auth/queries";
-import { getWorkspace } from "@/features/workspaces/queries";
-import { EditWorkspaceForm } from "@/features/workspaces/components/edit-workspace-form";
 import { redirect } from "next/navigation";
 
+<<<<<<< HEAD
 type Props = {
     params: Promise<{ workspaceId: string }>;
 }
@@ -29,3 +27,17 @@ const WorkSpaceIdSettingsPage = async ({ params }: Props) => {
 }
 
 export default WorkSpaceIdSettingsPage;
+=======
+import { getCurrent } from "@/features/auth/queries";
+
+import { WorkspaceIdSettingsClient } from "./client";
+
+const WorkspaceIdSettingsPage = async () => {
+  const user = await getCurrent();
+  if (!user) redirect("/sign-in");
+
+  return <WorkspaceIdSettingsClient />
+};
+ 
+export default WorkspaceIdSettingsPage;
+>>>>>>> temp-branch
