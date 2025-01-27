@@ -1,13 +1,5 @@
 "use client";
 
-<<<<<<< HEAD
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { 
-    DropdownMenu, 
-    DropdownMenuContent, 
-    DropdownMenuItem, 
-    DropdownMenuTrigger 
-=======
 import { Loader, LogOut } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -15,7 +7,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
->>>>>>> temp-branch
 } from "@/components/ui/dropdown-menu";
 import { DottedSeparator } from "@/components/dotted-separator";
 
@@ -23,28 +14,10 @@ import { useLogout } from "../api/use-logout";
 import { useCurrent } from "../api/use-current";
 
 export const UserButton = () => {
-<<<<<<< HEAD
-    const {data: user, isLoading} = useCurrent();
-    const { mutate: logout } = useLogout();
-
-    if (isLoading) {
-        <div className="size-10 rounded-full flex items-center justify-center bg-neutral-200 border border-neutral-300">
-            <Loader className="size-4 animate-spin text-muted-foreground"/>
-        </div>
-    }
-
-    if (!user) {
-        return null;
-    }
-
-    const {name, email} = user;
-
-=======
   const { mutate: logout } = useLogout();
   const { data: user, isLoading } = useCurrent();
 
   if (isLoading) {
->>>>>>> temp-branch
     return (
       <div className="size-10 rounded-full flex items-center justify-center bg-neutral-200 border border-neutral-300">
         <Loader className="size-4 animate-spin text-muted-foreground" />

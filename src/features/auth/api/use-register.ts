@@ -1,11 +1,8 @@
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { InferRequestType, InferResponseType } from "hono";
-<<<<<<< HEAD
-=======
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
->>>>>>> temp-branch
 import { client } from "@/lib/rpc";
 
 type ResponseType = InferResponseType<typeof client.api.auth.register["$post"]>;

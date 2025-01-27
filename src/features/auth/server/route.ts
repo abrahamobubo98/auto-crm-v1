@@ -10,28 +10,11 @@ import { AUTH_COOKIE } from "../constants";
 import { loginSchema, registerSchema } from "../schemas";
 
 const app = new Hono()
-<<<<<<< HEAD
-    .get(
-        "/current", 
-        sessionMiddleware, 
-        (c) => {
-            const user = c.get("user");
-            return c.json({ data: user });
-        }
-    )
-    .post(
-        "/login",
-        zValidator("json", loginSchema),
-        async (c) => {
-            
-            const { email, password } = c.req.valid("json");
-=======
   .get(
     "/current",
     sessionMiddleware,
     (c) => {
       const user = c.get("user");
->>>>>>> temp-branch
 
       return c.json({ data: user });
     }
@@ -42,28 +25,6 @@ const app = new Hono()
     async (c) => {
       const { email, password } = c.req.valid("json");
 
-<<<<<<< HEAD
-            setCookie(c, AUTH_COOKIE, session.secret, {
-                path: "/",
-                httpOnly: true,
-                secure: process.env.NODE_ENV === "production",
-                sameSite: "lax",
-                maxAge: 60 * 60 * 24 * 30,
-            });
-            
-            return c.json({ email, password });
-        }
-    )
-
-    .post(
-        "/register",
-        zValidator("json", registerSchema),
-        async (c) => {
-            
-            const body = await c.req.json();
-            
-            const { name, email, password } = c.req.valid("json");
-=======
       const { account } = await createAdminClient();
       const session = await account.createEmailPasswordSession(
         email,
@@ -77,7 +38,6 @@ const app = new Hono()
         sameSite: "strict",
         maxAge: 60 * 60 * 24 * 30,
       });
->>>>>>> temp-branch
 
       return c.json({ success: true });
     }
@@ -96,26 +56,10 @@ const app = new Hono()
         name,
       );
 
-<<<<<<< HEAD
-            setCookie(c, AUTH_COOKIE, session.secret, {
-                path: "/",
-                httpOnly: true,
-                secure: process.env.NODE_ENV === "production",
-                sameSite: "lax",
-                maxAge: 60 * 60 * 24 * 30,
-            });
-            
-            console.log(body);
-            
-            return c.json({ data: user });
-        }
-    )
-=======
       const session = await account.createEmailPasswordSession(
         email,
         password,
       );
->>>>>>> temp-branch
 
       setCookie(c, AUTH_COOKIE, session.secret, {
         path: "/",

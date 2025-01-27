@@ -39,19 +39,23 @@ export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
     label: member.name,
   }));
 
-  const [filters, setters] = useTaskFilters();
-  const { status, assigneeId, projectId, dueDate } = filters;
+  const [{
+    status,
+    assigneeId,
+    projectId,
+    dueDate
+  }, setFilters] = useTaskFilters();
 
   const onStatusChange = (value: string) => {
-    setters.status(value === "all" ? null : value as TaskStatus);
+    setFilters({ status: value === "all" ? null : value as TaskStatus });
   };
 
   const onAssigneeChange = (value: string) => {
-    setters.assigneeId(value === "all" ? null : value);
+    setFilters({ assigneeId: value === "all" ? null : value as string });
   };
 
   const onProjectChange = (value: string) => {
-    setters.projectId(value === "all" ? null : value);
+    setFilters({ projectId: value === "all" ? null : value as string });
   };
 
   if (isLoading) return null;
@@ -125,7 +129,7 @@ export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
         className="h-8 w-full lg:w-auto"
         value={dueDate ? new Date(dueDate) : undefined}
         onChange={(date) => {
-          setters.dueDate(date ? date.toISOString() : null);
+          setFilters({ dueDate: date ? date.toISOString() : null })
         }}
       />
     </div>

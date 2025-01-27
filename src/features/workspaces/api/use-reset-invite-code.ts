@@ -8,11 +8,7 @@ type ResponseType = InferResponseType<typeof client.api.workspaces[":workspaceId
 type RequestType = InferRequestType<typeof client.api.workspaces[":workspaceId"]["reset-invite-code"]["$post"]>;
 
 export const useResetInviteCode = () => {
-<<<<<<< HEAD
-    const queryClient = useQueryClient();
-=======
   const queryClient = useQueryClient();
->>>>>>> temp-branch
 
   const mutation = useMutation<
     ResponseType,
@@ -22,23 +18,9 @@ export const useResetInviteCode = () => {
     mutationFn: async ({ param }) => {
       const response = await client.api.workspaces[":workspaceId"]["reset-invite-code"]["$post"]({ param });
 
-<<<<<<< HEAD
-            return await response.json();
-        },
-        onSuccess: ({data}) => {
-            toast.success("Invite code reset successfully");
-            queryClient.invalidateQueries({ queryKey: ["workspaces"] });
-            queryClient.invalidateQueries({ queryKey: ["workspace", data.$id] });
-        },
-        onError: () => {
-            toast.error("Failed to reset invite code");
-        }
-    });
-=======
       if (!response.ok) {
         throw new Error("Failed to reset invite code");
       }
->>>>>>> temp-branch
 
       return await response.json();
     },

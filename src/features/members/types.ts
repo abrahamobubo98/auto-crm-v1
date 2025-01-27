@@ -10,11 +10,3 @@ export type Member = Models.Document & {
   userId: string;
   role: MemberRole;
 };
-
-export type PopulatedMember = Models.Document & {
-  name: string;
-  email: string;
-  workspaceId: string;
-  userId: string;
-  role: MemberRole;
-};

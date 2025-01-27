@@ -1,11 +1,5 @@
 "use client";
 
-<<<<<<< HEAD
-import {useRef} from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-=======
->>>>>>> temp-branch
 import { z } from "zod";
 import { useRef } from "react";
 import Image from "next/image";
@@ -18,16 +12,6 @@ import { ArrowLeftIcon, CopyIcon, ImageIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-<<<<<<< HEAD
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { ArrowLeftIcon, CopyIcon, ImageIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { Workspace } from "../types";
-import { useUpdateWorkspace } from "../api/use-update-workspace";
-import { updateWorkspaceSchema } from "../schemas";
-=======
->>>>>>> temp-branch
 import { useConfirm } from "@/hooks/use-confirm";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { DottedSeparator } from "@/components/dotted-separator";
@@ -131,22 +115,10 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
 
   const fullInviteLink = `${window.location.origin}/workspaces/${initialValues.$id}/join/${initialValues.inviteCode}`;
 
-<<<<<<< HEAD
-        mutate({ 
-            form: finalValues, 
-            param: { workspaceId: initialValues.$id } 
-        }, {
-            onSuccess: () => {
-                form.reset();
-            }
-        });
-    };
-=======
   const handleCopyInviteLink = () => {
     navigator.clipboard.writeText(fullInviteLink)
       .then(() => toast.success("Invite link copied to clipboard"));
   };
->>>>>>> temp-branch
 
   return (
     <div className="flex flex-col gap-y-4">

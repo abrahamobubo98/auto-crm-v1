@@ -1,16 +1,6 @@
 "use client";
 
-<<<<<<< HEAD
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
-
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ArrowLeftIcon, Link, MoreVerticalIcon } from "lucide-react";
-import { DottedSeparator } from "@/components/dotted-separator";
-import { useGetMembers } from "@/features/members/api/use-get-members";
-=======
 import Link from "next/link";
->>>>>>> temp-branch
 import { Fragment } from "react";
 import { ArrowLeftIcon, MoreVerticalIcon } from "lucide-react";
 

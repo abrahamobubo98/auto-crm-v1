@@ -1,11 +1,7 @@
 "use client"
 
 import * as React from "react"
-<<<<<<< HEAD
-import { ChevronLeft, ChevronRight } from "lucide-react"
-=======
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons"
->>>>>>> temp-branch
 import { DayPicker } from "react-day-picker"
 
 import { cn } from "@/lib/utils"

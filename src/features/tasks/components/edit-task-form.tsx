@@ -4,11 +4,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-<<<<<<< HEAD
-import { MemberAvatar } from "@/features/members/components/members-avatar";
-=======
 import { MemberAvatar } from "@/features/members/components/member-avatar";
->>>>>>> temp-branch
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 
 import { cn } from "@/lib/utils";
