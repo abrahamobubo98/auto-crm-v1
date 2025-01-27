@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Loader, PlusIcon } from "lucide-react";
 
-// import { useProjectId } from "@/features/projects/hooks/use-project-id";
+import { useProjectId } from "@/features/projects/hook/use-project-id";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 
 import { Button } from "@/components/ui/button";
@@ -42,7 +42,7 @@ export const TaskViewSwitcher = ({ hideProjectFilter }: TaskViewSwitcherProps) =
   };
 
   const workspaceId = useWorkspaceId();
-  // const paramProjectId = useProjectId();
+  const paramProjectId = useProjectId();
   const { open } = useCreateTaskModal();
 
   const { mutate: bulkUpdate } = useBulkUpdateTasks();
@@ -52,7 +52,7 @@ export const TaskViewSwitcher = ({ hideProjectFilter }: TaskViewSwitcherProps) =
     isLoading: isLoadingTasks
   } = useGetTasks({
     workspaceId,
-    // projectId: paramProjectId || projectId,
+    projectId: paramProjectId || projectId,
     assigneeId,
     status,
     dueDate,

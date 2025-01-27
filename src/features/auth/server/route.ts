@@ -23,8 +23,6 @@ const app = new Hono()
         zValidator("json", loginSchema),
         async (c) => {
             
-            const body = await c.req.json();
-            
             const { email, password } = c.req.valid("json");
 
             const {account} = await createAdminClient();
@@ -52,7 +50,7 @@ const app = new Hono()
             
             const body = await c.req.json();
             
-            const { name, email, password, confirmPassword } = c.req.valid("json");
+            const { name, email, password } = c.req.valid("json");
 
             const {account} = await createAdminClient();
             const user = await account.create(

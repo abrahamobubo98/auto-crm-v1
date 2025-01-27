@@ -1,29 +1,34 @@
-import "server-only";
-
-import  {
+import {
     Client,
     Account,
-    Storage,
     Users,
     Databases
 } from "node-appwrite";
-import { AUTH_COOKIE } from "@/features/auth/constants";
-import { cookies } from "next/headers";
 
+// Create a client for browser-side usage
+const client = new Client()
+    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
+    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT!);
 
-export async function createSessionClient(){
-    const client = new Client()
-            .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
-            .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT!);
+// Export instances for direct usage in client components
+export const account = new Account(client);
+export const databases = new Databases(client);
 
-    const cookieStore = await cookies();
-    const session = cookieStore.get(AUTH_COOKIE);
+// Flexible client creation functions
+export function createClient(session?: string) {
+    const newClient = new Client()
+        .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
+        .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT!);
 
-    if (!session || !session.value) {
-        throw new Error("Unauthorized");
+    if (session) {
+        newClient.setSession(session);
     }
 
-    client.setSession(session.value);
+    return newClient;
+}
+
+export function createClientWithSession(session: string) {
+    const client = createClient(session);
 
     return {
         get account() {
@@ -35,11 +40,11 @@ export async function createSessionClient(){
     }
 }
 
-export async function createAdminClient() {
+export function createAdminClient() {
     const client = new Client()
         .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
         .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT!)
-        .setKey(process.env.NEXT_APPWRITE_KEY!)
+        .setKey(process.env.NEXT_APPWRITE_KEY!);
 
     return {
         get account() {
@@ -47,6 +52,9 @@ export async function createAdminClient() {
         },
         get users() {
             return new Users(client);
+        },
+        get databases() {
+            return new Databases(client);
         }
     }
 }

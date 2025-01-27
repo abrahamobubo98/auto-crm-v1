@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { account } from "@/lib/appwrite";
 import { ArrowRight, Mail, Lock, User } from "lucide-react";
-import { ID } from "node-appwrite";
+import { ID, AppwriteException } from "node-appwrite";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -20,29 +20,30 @@ export default function SignupPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
     setError("");
+    setIsLoading(true);
 
     try {
-      // Create user account
+      // Create the account
       await account.create(
         ID.unique(),
         email,
         password,
         name
       );
-      
+
       // Log them in automatically
       await account.createSession(email, password);
       router.push("/dashboard");
-    } catch (err: any) {
-      // More user-friendly error messages
-      if (err.code === 409) {
-        setError("An account with this email already exists. Please sign in instead.");
-      } else if (err.code === 400) {
-        setError("Please ensure your password is at least 8 characters long.");
+    } catch (err) {
+      if (err instanceof AppwriteException) {
+        if (err.code === 409) {
+          setError("An account with this email already exists. Please sign in instead.");
+        } else {
+          setError(err.message);
+        }
       } else {
-        setError(err.message || "Failed to create account. Please try again.");
+        setError("An unexpected error occurred. Please try again.");
       }
     } finally {
       setIsLoading(false);

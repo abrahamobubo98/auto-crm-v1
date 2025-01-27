@@ -5,7 +5,7 @@ import { formatDistanceToNow } from "date-fns";
 import { CalendarIcon, PlusIcon, SettingsIcon } from "lucide-react";
 
 import { Task } from "@/features/tasks/types";
-import { Member, PopulatedMember } from "@/features/members/types";
+import { PopulatedMember } from "@/features/members/types";
 import { Project } from "@/features/projects/types";
 import { useGetTasks } from "@/features/tasks/api/use-get-tasks";
 import { useGetMembers } from "@/features/members/api/use-get-members";

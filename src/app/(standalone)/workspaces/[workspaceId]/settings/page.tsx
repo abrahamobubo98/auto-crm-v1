@@ -3,32 +3,29 @@ import { getWorkspace } from "@/features/workspaces/queries";
 import { EditWorkspaceForm } from "@/features/workspaces/components/edit-workspace-form";
 import { redirect } from "next/navigation";
 
-interface WorkSpaceIdSettingsPageProps {
-    params: {
-        workspaceId: string;
-    };
+type Props = {
+    params: Promise<{ workspaceId: string }>;
 }
 
-const WorkSpaceIdSettingsPage = async ({
-    params 
-}: WorkSpaceIdSettingsPageProps) => {
-    
+const WorkSpaceIdSettingsPage = async ({ params }: Props) => {
+    const { workspaceId } = await params;
     const user = await getCurrent();
+    
     if (!user) {
         return redirect("/sign-in");
     }
 
-    const initialValues = await getWorkspace({workspaceId: params.workspaceId});
+    const workspace = await getWorkspace({ workspaceId });
 
-    if (!initialValues) {
-        redirect(`/workspaces/${params.workspaceId}`);
+    if (!workspace) {
+        redirect(`/workspaces/${workspaceId}`);
     }
 
     return (
         <div className="w-full lg:max-w-xl">
-            <EditWorkspaceForm initialValues={initialValues} />
+            <EditWorkspaceForm initialValues={workspace} />
         </div>
     );
-};
+}
 
 export default WorkSpaceIdSettingsPage;

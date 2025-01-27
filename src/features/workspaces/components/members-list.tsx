@@ -2,12 +2,11 @@
 
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeftIcon, Link, MoreVerticalIcon } from "lucide-react";
 import { DottedSeparator } from "@/components/dotted-separator";
 import { useGetMembers } from "@/features/members/api/use-get-members";
-import { Avatar } from "@/components/ui/avatar";
 import { Fragment } from "react";
 import { MemberAvatar } from "@/features/members/components/members-avatar";
 import { Separator } from "@/components/ui/separator";

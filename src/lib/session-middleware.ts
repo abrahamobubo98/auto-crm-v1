@@ -12,9 +12,6 @@ import {
     type Users as UsersType,
 } from "node-appwrite";
 
-import { Next } from "hono";
-
-import { Context } from "hono";
 import { getCookie } from "hono/cookie";
 import { createMiddleware } from "hono/factory";
 import { AUTH_COOKIE } from "@/features/auth/constants";

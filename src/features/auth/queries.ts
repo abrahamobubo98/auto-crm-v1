@@ -1,15 +1,10 @@
-import { cookies } from "next/headers";
-import { Client, Account } from "node-appwrite";
-
-import { AUTH_COOKIE } from "./constants";
-import { createSessionClient } from "@/lib/appwrite";
+import { getAppwriteServerClient } from "@/lib/server/appwrite";
 
 export const getCurrent = async () => {
     try {
-        const { account } = await createSessionClient();
-
-        return await account.get();
+        const client = await getAppwriteServerClient();
+        return await client.account.get();
     } catch (error) {
-        return null;
+        return error;
     }
 };

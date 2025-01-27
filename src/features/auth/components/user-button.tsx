@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { 
     DropdownMenu, 
     DropdownMenuContent, 
@@ -27,10 +27,6 @@ export const UserButton = () => {
     }
 
     const {name, email} = user;
-
-    const avatarFallback = name
-        ? name.charAt(0).toUpperCase() 
-        : email?.charAt(0).toUpperCase() ?? "U";
 
     return (
         <DropdownMenu modal={false}>

@@ -2,7 +2,6 @@
 
 import {useRef} from "react";
 import { useForm } from "react-hook-form";
-import { createWorkspaceSchema } from "../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Image from "next/image";
@@ -25,7 +24,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { ArrowLeftIcon, Copy, CopyIcon, ImageIcon } from "lucide-react";
+import { ArrowLeftIcon, CopyIcon, ImageIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Workspace } from "../types";
@@ -112,7 +111,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
             form: finalValues, 
             param: { workspaceId: initialValues.$id } 
         }, {
-            onSuccess: ({data}) => {
+            onSuccess: () => {
                 form.reset();
             }
         });

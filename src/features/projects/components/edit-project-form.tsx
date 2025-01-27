@@ -24,7 +24,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { ArrowLeftIcon, Copy, CopyIcon, ImageIcon } from "lucide-react";
+import { ArrowLeftIcon, ImageIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Project } from "../types";
@@ -32,7 +32,6 @@ import { useUpdateProject } from "../api/use-update-project";
 import { updateProjectSchema } from "../schemas";
 import { useConfirm } from "@/hooks/use-confirm";
 import { useDeleteProject } from "../api/use-delete-project";
-import { toast } from "sonner";
 
 interface EditProjectFormProps {
     onCancel?: () => void;   
@@ -244,7 +243,7 @@ export const EditProjectForm = ({ onCancel, initialValues }: EditProjectFormProp
                         variant="destructive"
                         size="sm"
                         type="button"
-                        disabled={isPending}
+                        disabled={isPending || isDeletingProject}
                         onClick={handleDelete}
                         >
                             Delete Project
