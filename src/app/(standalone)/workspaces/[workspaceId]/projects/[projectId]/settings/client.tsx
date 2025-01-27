@@ -1,7 +1,7 @@
 "use client";
 
 import { useGetProject } from "@/features/projects/api/use-get-project";
-import { useProjectId } from "@/features/projects/hook/use-project-id";
+import { useProjectId } from "@/features/projects/hooks/use-project-id";
 import { EditProjectForm } from "@/features/projects/components/edit-project-form";
 
 import { PageLoader } from "@/components/page-loader";

@@ -11,8 +11,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-// import { useDeleteTask } from "../api/use-delete-task";
-// import { useEditTaskModal } from "../hooks/use-edit-task-modal";
+import { useDeleteTask } from "../api/use-delete-task";
+import { useEditTaskModal } from "../hooks/use-edit-task-modal";
 
 interface TaskActionsProps {
   id: string;
@@ -24,20 +24,20 @@ export const TaskActions = ({ id, projectId, children }: TaskActionsProps) => {
   const workspaceId = useWorkspaceId();
   const router = useRouter();
 
-  // const { open } = useEditTaskModal();
+  const { open } = useEditTaskModal();
   
   const [ConfirmDialog, confirm] = useConfirm(
     "Delete task",
     "This action cannot be undone.",
     "destructive"
   );
-  // const { mutate, isPending } = useDeleteTask();
+  const { mutate, isPending } = useDeleteTask();
 
   const onDelete = async () => {
     const ok = await confirm();
     if (!ok) return;
 
-    // mutate({ param: { taskId: id } });
+    mutate({ param: { taskId: id } });
   };
 
   const onOpenTask = () => {
@@ -79,7 +79,7 @@ export const TaskActions = ({ id, projectId, children }: TaskActionsProps) => {
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={onDelete}
-            // disabled={isPending}
+            disabled={isPending}
             className="text-amber-700 focus:text-amber-700 font-medium p-[10px]"
           >
             <TrashIcon className="size-4 mr-2 stroke-2" />
