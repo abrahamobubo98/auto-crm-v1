@@ -21,12 +21,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-
 import { useLogin } from "../api/use-login";
 
-
 export const SignInCard = () => {
-    const  { mutate, isPending } = useLogin();
+    const { mutate, isPending } = useLogin();
 
     const form = useForm<z.infer<typeof loginSchema>>({
         resolver: zodResolver(loginSchema),
@@ -36,9 +34,12 @@ export const SignInCard = () => {
         },
     }); 
 
-    const onSubmit = (values: z.infer<typeof loginSchema>) => {
-        mutate({ json: values });
-        console.log(values);
+    const onSubmit = async (values: z.infer<typeof loginSchema>) => {
+        try {
+            mutate({ json: values });
+        } catch (error) {
+            console.error('Login error:', error);
+        }
     };
 
     return (

@@ -23,7 +23,9 @@ export const useLogin = () => {
                 throw new Error("Failed to login");
             }
 
-            return await response.json();
+            const results = await response.json();
+            console.log(results);
+            return results;
         },
         onSuccess: () => {
             router.refresh();
