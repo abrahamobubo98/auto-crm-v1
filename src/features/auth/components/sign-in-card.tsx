@@ -105,7 +105,7 @@ export const SignInCard = () => {
             <div className="px-7">
                 <DottedSeparator />
             </div>
-            <CardContent className="p-7 flex flex-col gap-y-4">
+            {/* <CardContent className="p-7 flex flex-col gap-y-4">
                 <Button 
                     variant="secondary"
                     size="lg"
@@ -124,7 +124,7 @@ export const SignInCard = () => {
                     <FaGithub className="mr-2 size-5" />
                     Login with Github
                 </Button>
-            </CardContent>
+            </CardContent> */}
             <div className="px-7">
                 <DottedSeparator />
             </div>

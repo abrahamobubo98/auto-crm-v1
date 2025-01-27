@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback } from "react";
-import { useQueryState } from "nuqs";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Loader, PlusIcon } from "lucide-react";
 
 // import { useProjectId } from "@/features/projects/hooks/use-project-id";
@@ -29,15 +29,17 @@ interface TaskViewSwitcherProps {
 };
 
 export const TaskViewSwitcher = ({ hideProjectFilter }: TaskViewSwitcherProps) => {
-  const [{
-    status,
-    assigneeId,
-    projectId,
-    dueDate
-  }] = useTaskFilters();
-  const [view, setView] = useQueryState("task-view", {
-    defaultValue: "table",
-  });
+  const [filters] = useTaskFilters();
+  const { status, assigneeId, projectId, dueDate } = filters;
+  
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const view = searchParams.get("task-view") || "table";
+  const setView = (newView: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("task-view", newView);
+    router.push(`?${params.toString()}`);
+  };
 
   const workspaceId = useWorkspaceId();
   // const paramProjectId = useProjectId();

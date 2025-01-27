@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Building a Modern Customer Support System
+Creating a modern customer support system requires a balanced focus on technical architecture, user experience, and customer-facing features. This document outlines the core functionalities required for a robust, scalable, and adaptable system. Your goal is to rebuild as many of the following components as possible.
 
-## Getting Started
+To pass the Rebuild portion of this project, you must implement at least 3-5 features. You can choose from any of the features listed below. The features you choose should build a cohesive user experience and move the app towards MVP. 
 
-First, run the development server:
+## Core Architecture
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Ticket Data Model
+The ticket system is central to AutoCRM, treated as a living document that captures the entire customer interaction journey. Key components include:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* Standard Identifiers & Timestamps: Basic fields like ticket ID, creation date, and status updates.
+* Flexible Metadata:
+  * Dynamic Status Tracking: Reflects team workflows.
+  * Priority Levels: Manage response times effectively.
+  * Custom Fields: Tailor tickets to specific business needs.
+  * Tags: Enable categorization and automation.
+  * Internal Notes: Facilitate team collaboration.
+  * Full Conversation History: Includes interactions between customers and team members.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### API-First Design
+An API-first approach ensures accessibility and scalability, enabling:
+* Integration: Connect seamlessly with websites, applications, and external tools.
+* Automation: Simplify routine tasks and workflows.
+* AI Enhancements: Lay the groundwork for future features.
+* Analytics: Support robust reporting and insights.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+API Features:
+* Synchronous Endpoints: Handle immediate operations.
+* Webhooks: Support event-driven architectures.
+* Granular Permissions: Ensure secure integrations using API key authentication.
 
-## Learn More
+## Employee Interface
 
-To learn more about Next.js, take a look at the following resources:
+### Queue Management
+* Customizable Views: Prioritize tickets effectively.
+* Real-Time Updates: Reflect changes instantly.
+* Quick Filters: Focus on ticket states and priorities.
+* Bulk Operations: Streamline repetitive tasks.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Ticket Handling
+* Customer History: Display detailed interaction logs.
+* Rich Text Editing: Craft polished responses.
+* Quick Responses: Use macros and templates.
+* Collaboration Tools: Share internal notes and updates.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Performance Tools
+* Metrics Tracking: Monitor response times and resolution rates.
+* Template Management: Optimize frequently used responses.
+* Personal Stats: Help agents improve efficiency.
 
-## Deploy on Vercel
+## Administrative Control
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Team Management
+* Create and manage teams with specific focus areas.
+* Assign agents based on skills.
+* Set coverage schedules and monitor team performance.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Routing Intelligence
+* Rule-Based Assignment: Match tickets using properties.
+* Skills-Based Routing: Assign issues based on expertise.
+* Load Balancing: Optimize workload distribution across teams and time zones.
+
+## Data Management
+
+### Schema Flexibility
+* Easy Field Addition: Add new fields and relationships.
+* Migration System: Simplify schema updates.
+* Audit Logging: Track all changes.
+* Archival Strategies: Manage historical data efficiently.
+
+### Performance Optimization
+* Caching: Reduce load for frequently accessed data.
+* Query Optimization: Improve system efficiency.
+* Scalable Storage: Handle attachments and large datasets.
+* Regular Maintenance: Ensure smooth operation.
+
+## Customer Features
+
+### Customer Portal
+* Ticket Tracking: Allow customers to view, update, and track their tickets.
+* History of Interactions: Display previous communications and resolutions.
+* Secure Login: Ensure privacy with authentication.
+
+### Self-Service Tools
+* Knowledge Base: Provide searchable FAQs and help articles.
+* AI-Powered Chatbots: Offer instant answers to repetitive queries.
+* Interactive Tutorials: Guide customers through common issues step-by-step.
+
+### Communication Tools
+* Live Chat: Enable real-time support conversations.
+* Email Integration: Allow ticket creation and updates directly via email.
+* Web Widgets: Embed support tools on customer-facing websites or apps.
+
+### Feedback and Engagement
+* Issue Feedback: Collect feedback after ticket resolution.
+* Ratings System: Let customers rate their support experience.
+
+### Multi-Channel Support
+* Mobile-Friendly Design: Ensure support tools work on all devices.
+* Omnichannel Integration: Support interactions via chat, social media, and SMS.
+
+### Advanced Features
+* Personalized Suggestions: Use AI to recommend relevant articles or guides.
+* Proactive Notifications: Alert customers about ticket updates or events.
+* Multilingual Support: Offer help in multiple languages.
